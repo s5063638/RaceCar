@@ -36,6 +36,14 @@ public class StoreManager : MonoBehaviour {
         SceneManager.LoadSceneAsync("Load");
     }
 
+    public void DetailsBack()
+    {
+        platform.SetActive(false);
+        details.SetActive(false);
+        general.SetActive(true);
+        carOptions.SetActive(true);
+    }
+
     public void Mustang()
     {
         platform.SetActive(true);
