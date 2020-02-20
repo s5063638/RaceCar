@@ -11,6 +11,13 @@ TagManager:
   - Count
   - PreTrig
   - Input
+  - CarName
+  - Speed
+  - ZeroSixty
+  - Handling
+  - Cost
+  - BuyButton
+  - Money
   layers:
   - Default
   - TransparentFX
