@@ -10,7 +10,7 @@ public class ResetPlayerprefs : MonoBehaviour {
         PlayerPrefs.DeleteAll();
         PlayerPrefs.SetString("MustangOwned", "YES");
         PlayerPrefs.SetString("CarChosen", "Mustang");
-        PlayerPrefs.SetInt("Money", 0);
+        PlayerPrefs.SetInt("Money", 40000);
 	}
 	
 }

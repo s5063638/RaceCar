@@ -41,11 +41,33 @@ public class StoreCarDetails : MonoBehaviour {
         carEquipped = PlayerPrefs.GetString("CarChosen");
 	}
 
+    public void Purchased()
+    {
+        buyButton.GetComponent<Button>().interactable = true;
+        buyButton.GetComponentInChildren<Text>().text = "Use for Race?";
+        buyButton.GetComponentInChildren<Text>().fontSize = 23;
+        cost.text = "Already Owned";
+    }
+    public void Equipped()
+    {
+        buyButton.GetComponent<Button>().interactable = false;
+        buyButton.GetComponentInChildren<Text>().text = "Chosen for race";
+        buyButton.GetComponentInChildren<Text>().fontSize = 23;
+    }
+
     public void UpdateCar()
     {
-        car = PlayerPrefs.GetString("CarViewed");
 
-        if(car == "Mustang")
+        mustangOwned = PlayerPrefs.GetString("MustangOwned");
+        demonOwned = PlayerPrefs.GetString("DemonOwned");
+        chrysterOwned = PlayerPrefs.GetString("ChrysterOwned");
+        audoOwned = PlayerPrefs.GetString("AudoOwned");
+        hotOwned = PlayerPrefs.GetString("HotOwned");
+
+        car = PlayerPrefs.GetString("CarViewed");
+        carEquipped = PlayerPrefs.GetString("CarChosen");
+
+        if (car == "Mustang")
         {
             carName.text = "Mustang";
             speed.text = "Speed: 80mph";
@@ -56,17 +78,13 @@ public class StoreCarDetails : MonoBehaviour {
             {
                 cost.text = "Already Owned";
 
-                if (carEquipped == car)
+                if (carEquipped == "Mustang")
                 {
-                    buyButton.GetComponent<Button>().interactable = false;
-                    buyButton.GetComponentInChildren<Text>().text = "Chosen for race";
-                    buyButton.GetComponentInChildren<Text>().fontSize = 23;
+                    Equipped();
                 }
-                else
+                else if (carEquipped != "Mustang")
                 {
-                    buyButton.GetComponent<Button>().interactable = true;
-                    buyButton.GetComponentInChildren<Text>().text = "Use for Race?";
-                    buyButton.GetComponentInChildren<Text>().fontSize = 23;
+                    Purchased();
                 }
             }
             else
@@ -87,17 +105,13 @@ public class StoreCarDetails : MonoBehaviour {
             {
                 cost.text = "Already Owned";
 
-                if (carEquipped == car)
+                if (carEquipped == "Demon")
                 {
-                    buyButton.GetComponent<Button>().interactable = false;
-                    buyButton.GetComponentInChildren<Text>().text = "Chosen for race";
-                    buyButton.GetComponentInChildren<Text>().fontSize = 23;
+                    Equipped();
                 }
-                else
+                else if (carEquipped != "Demon")
                 {
-                    buyButton.GetComponent<Button>().interactable = true;
-                    buyButton.GetComponentInChildren<Text>().text = "Use for Race?";
-                    buyButton.GetComponentInChildren<Text>().fontSize = 23;
+                    Purchased();
                 }
             }
             else
@@ -120,17 +134,13 @@ public class StoreCarDetails : MonoBehaviour {
             {
                 cost.text = "Already Owned";
 
-                if (carEquipped == car)
+                if (carEquipped == "Chryster")
                 {
-                    buyButton.GetComponent<Button>().interactable = false;
-                    buyButton.GetComponentInChildren<Text>().text = "Chosen for race";
-                    buyButton.GetComponentInChildren<Text>().fontSize = 23;
+                    Equipped();
                 }
                 else
                 {
-                    buyButton.GetComponent<Button>().interactable = true;
-                    buyButton.GetComponentInChildren<Text>().text = "Use for Race?";
-                    buyButton.GetComponentInChildren<Text>().fontSize = 23;
+                    Purchased();
                 }
             }
             else
@@ -153,17 +163,13 @@ public class StoreCarDetails : MonoBehaviour {
             {
                 cost.text = "Already Owned";
 
-                if (carEquipped == car)
+                if (carEquipped == "Audo")
                 {
-                    buyButton.GetComponent<Button>().interactable = false;
-                    buyButton.GetComponentInChildren<Text>().text = "Chosen for race";
-                    buyButton.GetComponentInChildren<Text>().fontSize = 23;
+                   Equipped();
                 }
                 else
                 {
-                    buyButton.GetComponent<Button>().interactable = true;
-                    buyButton.GetComponentInChildren<Text>().text = "Use for Race?";
-                    buyButton.GetComponentInChildren<Text>().fontSize = 23;
+                    Purchased();
                 }
             }
             else
@@ -186,17 +192,13 @@ public class StoreCarDetails : MonoBehaviour {
             {
                 cost.text = "Already Owned";
 
-                if (carEquipped == car)
+                if (carEquipped == "Hotrod")
                 {
-                    buyButton.GetComponent<Button>().interactable = false;
-                    buyButton.GetComponentInChildren<Text>().text = "Chosen for race";
-                    buyButton.GetComponentInChildren<Text>().fontSize = 23;
+                    Equipped();
                 }
                 else
                 {
-                    buyButton.GetComponent<Button>().interactable = true;
-                    buyButton.GetComponentInChildren<Text>().text = "Use for Race?";
-                    buyButton.GetComponentInChildren<Text>().fontSize = 23;
+                    Purchased();
                 }
             }
             else

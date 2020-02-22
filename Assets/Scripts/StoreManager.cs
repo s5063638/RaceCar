@@ -54,6 +54,115 @@ public class StoreManager : MonoBehaviour {
     public void Buy()
     {
         //Insert stuff about buying here
+        string carViewed = PlayerPrefs.GetString("CarViewed");
+        string carEquipped = PlayerPrefs.GetString("CarChosen");
+        string owned = "";
+        int money = PlayerPrefs.GetInt("Money");
+
+        carDetails.UpdateCar();
+
+        if(carViewed == "Mustang")
+        {
+            owned = PlayerPrefs.GetString("MustangOwned");
+            if (owned == "YES")
+            {
+                if (carEquipped != "Mustang")
+                {
+                    PlayerPrefs.SetString("CarChosen", "Mustang");
+                    carDetails.Equipped();
+                }
+            }
+        }
+        if (carViewed == "Demon")
+        {
+            owned = PlayerPrefs.GetString("DemonOwned");
+            if (owned == "YES")
+            {
+                if (carEquipped != "Demon")
+                {
+                    PlayerPrefs.SetString("CarChosen", "Demon");
+                    carDetails.Equipped();
+                }
+            }
+            else
+            {
+                if (money >= 10000)
+                {
+                    money -= 10000;
+                    PlayerPrefs.SetInt("Money", money);
+                    PlayerPrefs.SetString("DemonOwned", "YES");
+                    carDetails.Purchased();
+                }
+            }
+        }
+        else if (carViewed == "Chryster")
+        {
+            owned = PlayerPrefs.GetString("ChrysterOwned");
+            if (owned == "YES")
+            {
+                if (carEquipped != "Chryster")
+                {
+                    PlayerPrefs.SetString("CarChosen", "Chryster");
+                    carDetails.Equipped();
+                }
+            }
+            else
+            {
+                if (money >= 15450)
+                {
+                    money -= 15450;
+                    PlayerPrefs.SetInt("Money", money);
+                    PlayerPrefs.SetString("ChrysterOwned", "YES");
+                    carDetails.Purchased();
+                }
+            }
+        }
+        else if (carViewed == "Audo")
+        {
+            owned = PlayerPrefs.GetString("AudoOwned");
+            if (owned == "YES")
+            {
+                if (carEquipped != "Audo")
+                {
+                    PlayerPrefs.SetString("CarChosen", "Audo");
+                    carDetails.Equipped();
+                }
+            }
+            else
+            {
+                if (money >= 25000)
+                {
+                    money -= 25000;
+                    PlayerPrefs.SetInt("Money", money);
+                    PlayerPrefs.SetString("AudoOwned", "YES");
+                    carDetails.Purchased();
+                }
+            }
+        }
+        else if (carViewed == "Hotrod")
+        {
+            owned = PlayerPrefs.GetString("HotOwned");
+            if (owned == "YES")
+            {
+                if (carEquipped != "Hotrod")
+                {
+                    PlayerPrefs.SetString("CarChosen", "Hotrod");
+                    carDetails.Equipped();
+                }
+            }
+            else
+            {
+                if (money >= 25000)
+                {
+                    money -= 25000;
+                    PlayerPrefs.SetInt("Money", money);
+                    PlayerPrefs.SetString("HotOwned", "YES");
+                    carDetails.Purchased();
+                }
+            }
+        }
+
+        myMoney.GetComponent<TextMeshProUGUI>().text = "My Money: $" + PlayerPrefs.GetInt("Money").ToString();
     }
 
     public void Back()
@@ -89,6 +198,7 @@ public class StoreManager : MonoBehaviour {
         carOptions.SetActive(false);
 
         PlayerPrefs.SetString("CarViewed", "Mustang");
+
         carDetails.UpdateCar();
     }
 
@@ -105,6 +215,7 @@ public class StoreManager : MonoBehaviour {
         carOptions.SetActive(false);
 
         PlayerPrefs.SetString("CarViewed", "Demon");
+
         carDetails.UpdateCar();
     }
 
@@ -121,6 +232,7 @@ public class StoreManager : MonoBehaviour {
         carOptions.SetActive(false);
 
         PlayerPrefs.SetString("CarViewed", "Chryster");
+
         carDetails.UpdateCar();
     }
 
