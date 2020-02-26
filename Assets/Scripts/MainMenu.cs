@@ -12,6 +12,8 @@ public class MainMenu : MonoBehaviour {
     private GameObject loginCanvas;
     private GameObject inputField;
 
+    private int playerID;
+
     void Awake()
     {
         //AnalyticsResult result = Analytics.CustomEvent("Test");
@@ -52,6 +54,8 @@ public class MainMenu : MonoBehaviour {
 
     public void Scoreboard()
     {
+        AnalyticsEvent.Custom("OpenedStore", null);
+
         AnalyticsEvent.ScreenVisit(ScreenName.Leaderboard);
 
         PlayerPrefs.SetString("Load", "Scoreboard");
@@ -60,7 +64,7 @@ public class MainMenu : MonoBehaviour {
 
     public void QuitGame()
     {
-        PlayerPrefs.DeleteKey("Logged In");
+        AnalyticsEvent.Custom("Quit", null);
         AnalyticsEvent.GameOver();
         Application.Quit();
     }
@@ -72,6 +76,8 @@ public class MainMenu : MonoBehaviour {
             PlayerPrefs.SetInt("Player ID", int.Parse(inputField.GetComponent<InputField>().text));
 
             PlayerPrefs.SetString("Logged In", "Yes");
+
+            playerID = PlayerPrefs.GetInt("Player ID");
 
             loginCanvas.SetActive(false);
             mainMenuCanvas.SetActive(true);

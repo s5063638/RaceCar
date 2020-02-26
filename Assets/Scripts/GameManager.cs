@@ -20,6 +20,11 @@ public class GameManager : MonoBehaviour {
     public float startTime;
     public bool racing;
 
+    private GameObject lap2Obstacles;
+    private GameObject lap3Obstacles;
+
+    private CameraFollow camFollow;
+
     void Awake()
     {
         AnalyticsEvent.LevelStart("Lake Race");
@@ -29,14 +34,21 @@ public class GameManager : MonoBehaviour {
 	void Start ()
     {
         lapController = GameObject.FindGameObjectWithTag("Finish");
-        car = GameObject.FindGameObjectWithTag("Car");
         numOfLaps = 3;
         currentLap = 1;
         racing = false;
         timerText = GameObject.FindGameObjectWithTag("Timer").GetComponent<TextMeshProUGUI>();
         lapText = GameObject.FindGameObjectWithTag("Laps").GetComponent<TextMeshProUGUI>();
         countDownText = GameObject.FindGameObjectWithTag("Count").GetComponent<TextMeshProUGUI>();
+        camFollow = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFollow>();
 
+        lap2Obstacles = GameObject.Find("Lap 2");
+        lap3Obstacles = GameObject.Find("Lap 3");
+
+        lap2Obstacles.SetActive(false);
+        lap3Obstacles.SetActive(false);
+
+        StartCoroutine(SetCar());
         StartCoroutine(StartRace());
 	}
 	
@@ -52,6 +64,15 @@ public class GameManager : MonoBehaviour {
 
             timerText.text = mins + ":" + secs;
             lapText.text = "Lap " + currentLap + "/" + numOfLaps;
+        }
+
+        if(currentLap == 2)
+        {
+            lap2Obstacles.SetActive(true);
+        }
+        else if(currentLap == 3)
+        {
+            lap3Obstacles.SetActive(true);
         }
 	}
 
@@ -76,6 +97,7 @@ public class GameManager : MonoBehaviour {
 
     IEnumerator StartRace()
     {
+        yield return new WaitForSeconds(0.5f);
         lapController.SetActive(false);
         countDownText.text = "3";
         yield return new WaitForSeconds(1.0f);
@@ -98,5 +120,13 @@ public class GameManager : MonoBehaviour {
 
         PlayerPrefs.SetString("Load", "Scoreboard");
         SceneManager.LoadSceneAsync("Load");
+    }
+
+    IEnumerator SetCar()
+    {
+        yield return new WaitForSeconds(0.5f);
+        car = GameObject.FindGameObjectWithTag("Car");
+        camFollow.parentRigidbody = car.GetComponent<Rigidbody>();
+        camFollow.target = car.transform;
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CarScript : MonoBehaviour {
 
@@ -19,7 +20,15 @@ public class CarScript : MonoBehaviour {
         carRigidbody = this.GetComponent<Rigidbody>();
         canMove = false;
     }
-	
+
+    public void OnTriggerEnter(Collider collider)
+    {
+        if(collider.gameObject.tag == "Water")
+        {
+            SceneManager.LoadScene("Crashed");
+        }
+    }
+
 	// Update is called once per frame
 	void FixedUpdate ()
     {

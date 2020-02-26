@@ -92,6 +92,8 @@ public class StoreManager : MonoBehaviour {
                     PlayerPrefs.SetInt("Money", money);
                     PlayerPrefs.SetString("DemonOwned", "YES");
                     carDetails.Purchased();
+  
+                    AnalyticsEvent.Custom("Demon Bought", null);
                 }
             }
         }
@@ -114,6 +116,7 @@ public class StoreManager : MonoBehaviour {
                     PlayerPrefs.SetInt("Money", money);
                     PlayerPrefs.SetString("ChrysterOwned", "YES");
                     carDetails.Purchased();
+                    AnalyticsEvent.Custom("Chryster Bought", null);
                 }
             }
         }
@@ -136,6 +139,7 @@ public class StoreManager : MonoBehaviour {
                     PlayerPrefs.SetInt("Money", money);
                     PlayerPrefs.SetString("AudoOwned", "YES");
                     carDetails.Purchased();
+                    AnalyticsEvent.Custom("Audo Bought", null);
                 }
             }
         }
@@ -158,6 +162,7 @@ public class StoreManager : MonoBehaviour {
                     PlayerPrefs.SetInt("Money", money);
                     PlayerPrefs.SetString("HotOwned", "YES");
                     carDetails.Purchased();
+                    AnalyticsEvent.Custom("Hotrod Bought", null);
                 }
             }
         }
@@ -198,6 +203,7 @@ public class StoreManager : MonoBehaviour {
         carOptions.SetActive(false);
 
         PlayerPrefs.SetString("CarViewed", "Mustang");
+        AnalyticsEvent.Custom("MustangViewed", null);
 
         carDetails.UpdateCar();
     }
@@ -215,6 +221,7 @@ public class StoreManager : MonoBehaviour {
         carOptions.SetActive(false);
 
         PlayerPrefs.SetString("CarViewed", "Demon");
+        AnalyticsEvent.Custom("DemonViewed", null);
 
         carDetails.UpdateCar();
     }
@@ -232,6 +239,7 @@ public class StoreManager : MonoBehaviour {
         carOptions.SetActive(false);
 
         PlayerPrefs.SetString("CarViewed", "Chryster");
+        AnalyticsEvent.Custom("ChrysterViewed", null);
 
         carDetails.UpdateCar();
     }
@@ -249,6 +257,8 @@ public class StoreManager : MonoBehaviour {
         carOptions.SetActive(false);
 
         PlayerPrefs.SetString("CarViewed", "Audo");
+        AnalyticsEvent.Custom("AudoViewed", null);
+
         carDetails.UpdateCar();
     }
 
@@ -265,6 +275,8 @@ public class StoreManager : MonoBehaviour {
         carOptions.SetActive(false);
 
         PlayerPrefs.SetString("CarViewed", "Hotrod");
+        AnalyticsEvent.Custom("Hotrod Viewed", null);
+
         carDetails.UpdateCar();
     }
 }

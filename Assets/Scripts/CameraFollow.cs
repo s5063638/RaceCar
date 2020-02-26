@@ -34,38 +34,49 @@ public class CameraFollow : MonoBehaviour {
     private float yVelocity = 0.0F;
     private float zVelocity = 0.0F;
 
+    bool canFollow;
+
     void Start()
     {
         lookAtVector = new Vector3(0, lookAtHeight, 0);
-        target = GameObject.FindGameObjectWithTag("Car").GetComponent<Transform>();
-        parentRigidbody = GameObject.FindGameObjectWithTag("Car").GetComponent<Rigidbody>();
         distance = 10.2f;
         height = 2.83f;
+        canFollow = false;
+        StartCoroutine(WaitToFollow());
     }
 
     void LateUpdate()
     {
+        if (canFollow)
+        {
 
-        wantedHeight = target.position.y + height;
-        currentHeight = transform.position.y;
+            wantedHeight = target.position.y + height;
+            currentHeight = transform.position.y;
 
-        wantedRotationAngle = target.eulerAngles.y;
-        currentRotationAngle = transform.eulerAngles.y;
+            wantedRotationAngle = target.eulerAngles.y;
+            currentRotationAngle = transform.eulerAngles.y;
 
-        currentRotationAngle = Mathf.SmoothDampAngle(currentRotationAngle, wantedRotationAngle, ref yVelocity, rotationSnapTime);
+            currentRotationAngle = Mathf.SmoothDampAngle(currentRotationAngle, wantedRotationAngle, ref yVelocity, rotationSnapTime);
 
-        currentHeight = Mathf.Lerp(currentHeight, wantedHeight, heightDamping * Time.deltaTime);
+            currentHeight = Mathf.Lerp(currentHeight, wantedHeight, heightDamping * Time.deltaTime);
 
-        wantedPosition = target.position;
-        wantedPosition.y = currentHeight;
+            wantedPosition = target.position;
+            wantedPosition.y = currentHeight;
 
-        usedDistance = Mathf.SmoothDampAngle(usedDistance, distance + (parentRigidbody.velocity.magnitude * distanceMultiplier), ref zVelocity, distanceSnapTime);
+            usedDistance = Mathf.SmoothDampAngle(usedDistance, distance + (parentRigidbody.velocity.magnitude * distanceMultiplier), ref zVelocity, distanceSnapTime);
 
-        wantedPosition += Quaternion.Euler(0, currentRotationAngle, 0) * new Vector3(0, 0, -usedDistance);
+            wantedPosition += Quaternion.Euler(0, currentRotationAngle, 0) * new Vector3(0, 0, -usedDistance);
 
-        transform.position = wantedPosition;
+            transform.position = wantedPosition;
 
-        transform.LookAt(target.position + lookAtVector);
+            transform.LookAt(target.position + lookAtVector);
+        }
 
+    }
+    
+    IEnumerator WaitToFollow()
+    {
+        yield return new WaitForSeconds(0.5f);
+        canFollow = true;
     }
 }
