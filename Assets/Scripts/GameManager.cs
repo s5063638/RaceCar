@@ -118,6 +118,8 @@ public class GameManager : MonoBehaviour {
         yield return new WaitForSeconds(2.0f);
         AnalyticsEvent.LevelComplete("Lake Race");
 
+        PlayerPrefs.SetFloat("Time taken", timer);
+
         PlayerPrefs.SetString("Load", "Scoreboard");
         SceneManager.LoadSceneAsync("Load");
     }

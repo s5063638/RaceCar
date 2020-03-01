@@ -42,20 +42,27 @@ public class MainMenu : MonoBehaviour {
 
     public void Play()
     {
+        AnalyticsEvent.Custom("game_play", new Dictionary<string, object>
+        {
+            { "PlayerID", playerID}
+        });
         PlayerPrefs.SetString("Load", "Lake Race");
         SceneManager.LoadSceneAsync("Load");
     }
 
     public void Store()
     {
+        AnalyticsEvent.Custom("opened_store", new Dictionary<string, object>
+        {
+            { "PlayerID", playerID}
+        });
+
         PlayerPrefs.SetString("Load", "Store");
         SceneManager.LoadSceneAsync("Load");
     }
 
     public void Scoreboard()
     {
-        AnalyticsEvent.Custom("OpenedStore", null);
-
         AnalyticsEvent.ScreenVisit(ScreenName.Leaderboard);
 
         PlayerPrefs.SetString("Load", "Scoreboard");
@@ -64,7 +71,10 @@ public class MainMenu : MonoBehaviour {
 
     public void QuitGame()
     {
-        AnalyticsEvent.Custom("Quit", null);
+        AnalyticsEvent.Custom("quit", new Dictionary<string, object>
+        {
+            { "PlayerID", playerID}
+        });
         AnalyticsEvent.GameOver();
         Application.Quit();
     }

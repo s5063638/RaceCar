@@ -19,6 +19,7 @@ public class StoreManager : MonoBehaviour {
     public GameObject myMoney;
 
     private StoreCarDetails carDetails;
+    private int playerID;
 
 	// Use this for initialization
 	void Awake ()
@@ -47,6 +48,8 @@ public class StoreManager : MonoBehaviour {
         hotrodCar.SetActive(false);
 
         details.SetActive(false);
+
+        playerID = PlayerPrefs.GetInt("Player ID");
 
         myMoney.GetComponent<TextMeshProUGUI>().text = "My Money: $" + PlayerPrefs.GetInt("Money").ToString();
     }
@@ -92,8 +95,11 @@ public class StoreManager : MonoBehaviour {
                     PlayerPrefs.SetInt("Money", money);
                     PlayerPrefs.SetString("DemonOwned", "YES");
                     carDetails.Purchased();
-  
-                    AnalyticsEvent.Custom("Demon Bought", null);
+
+                    AnalyticsEvent.Custom("demon_bought", new Dictionary<string, object>
+                    {
+                        { "PlayerID", playerID}
+                    });
                 }
             }
         }
@@ -116,7 +122,10 @@ public class StoreManager : MonoBehaviour {
                     PlayerPrefs.SetInt("Money", money);
                     PlayerPrefs.SetString("ChrysterOwned", "YES");
                     carDetails.Purchased();
-                    AnalyticsEvent.Custom("Chryster Bought", null);
+                    AnalyticsEvent.Custom("chryster_bought", new Dictionary<string, object>
+                    {
+                        { "PlayerID", playerID}
+                    });
                 }
             }
         }
@@ -139,7 +148,10 @@ public class StoreManager : MonoBehaviour {
                     PlayerPrefs.SetInt("Money", money);
                     PlayerPrefs.SetString("AudoOwned", "YES");
                     carDetails.Purchased();
-                    AnalyticsEvent.Custom("Audo Bought", null);
+                    AnalyticsEvent.Custom("audo_bought", new Dictionary<string, object>
+                    {
+                        { "PlayerID", playerID}
+                    });
                 }
             }
         }
@@ -162,7 +174,10 @@ public class StoreManager : MonoBehaviour {
                     PlayerPrefs.SetInt("Money", money);
                     PlayerPrefs.SetString("HotOwned", "YES");
                     carDetails.Purchased();
-                    AnalyticsEvent.Custom("Hotrod Bought", null);
+                    AnalyticsEvent.Custom("hotrod_bought", new Dictionary<string, object>
+                    {
+                        { "PlayerID", playerID}
+                    });
                 }
             }
         }
@@ -203,7 +218,10 @@ public class StoreManager : MonoBehaviour {
         carOptions.SetActive(false);
 
         PlayerPrefs.SetString("CarViewed", "Mustang");
-        AnalyticsEvent.Custom("MustangViewed", null);
+        AnalyticsEvent.Custom("mustang_viewed", new Dictionary<string, object>
+        {
+            { "PlayerID", playerID}
+        });
 
         carDetails.UpdateCar();
     }
@@ -221,7 +239,10 @@ public class StoreManager : MonoBehaviour {
         carOptions.SetActive(false);
 
         PlayerPrefs.SetString("CarViewed", "Demon");
-        AnalyticsEvent.Custom("DemonViewed", null);
+        AnalyticsEvent.Custom("demon_viewed", new Dictionary<string, object>
+        {
+            { "PlayerID", playerID}
+        });
 
         carDetails.UpdateCar();
     }
@@ -239,7 +260,10 @@ public class StoreManager : MonoBehaviour {
         carOptions.SetActive(false);
 
         PlayerPrefs.SetString("CarViewed", "Chryster");
-        AnalyticsEvent.Custom("ChrysterViewed", null);
+        AnalyticsEvent.Custom("chryster_viewed", new Dictionary<string, object>
+        {
+            { "PlayerID", playerID}
+        });
 
         carDetails.UpdateCar();
     }
@@ -257,7 +281,10 @@ public class StoreManager : MonoBehaviour {
         carOptions.SetActive(false);
 
         PlayerPrefs.SetString("CarViewed", "Audo");
-        AnalyticsEvent.Custom("AudoViewed", null);
+        AnalyticsEvent.Custom("audo_viewed", new Dictionary<string, object>
+        {
+            { "PlayerID", playerID}
+        });
 
         carDetails.UpdateCar();
     }
@@ -275,7 +302,10 @@ public class StoreManager : MonoBehaviour {
         carOptions.SetActive(false);
 
         PlayerPrefs.SetString("CarViewed", "Hotrod");
-        AnalyticsEvent.Custom("Hotrod Viewed", null);
+        AnalyticsEvent.Custom("hotrod_viewed", new Dictionary<string, object>
+        {
+            { "PlayerID", playerID}
+        });
 
         carDetails.UpdateCar();
     }
