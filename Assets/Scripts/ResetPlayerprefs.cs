@@ -8,6 +8,9 @@ public class ResetPlayerprefs : MonoBehaviour {
 	void Start ()
     {
         PlayerPrefs.DeleteAll();
+
+        PlayerPrefs.DeleteKey("Logged In");
+        
         PlayerPrefs.SetString("MustangOwned", "YES");
         PlayerPrefs.SetString("CarChosen", "Mustang");
         PlayerPrefs.SetInt("Money", 40000);

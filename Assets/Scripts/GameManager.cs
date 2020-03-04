@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour {
 
     private CameraFollow camFollow;
 
+    private int playerID;
     void Awake()
     {
         AnalyticsEvent.LevelStart("Lake Race");
@@ -47,6 +48,8 @@ public class GameManager : MonoBehaviour {
 
         lap2Obstacles.SetActive(false);
         lap3Obstacles.SetActive(false);
+
+        playerID = PlayerPrefs.GetInt("Player ID");
 
         StartCoroutine(SetCar());
         StartCoroutine(StartRace());
@@ -118,8 +121,25 @@ public class GameManager : MonoBehaviour {
         yield return new WaitForSeconds(2.0f);
         AnalyticsEvent.LevelComplete("Lake Race");
 
-        PlayerPrefs.SetFloat("Time taken", timer);
-
+        switch (PlayerPrefs.GetInt("Player ID"))
+        {
+            case 1:
+            {
+                PlayerPrefs.SetFloat("Time taken for " + 1, timer);
+                break;
+            }
+            case 2:
+            {
+                PlayerPrefs.SetFloat("Time taken for " + 2, timer);
+                break;
+            }
+            case 3:
+            {
+                 PlayerPrefs.SetFloat("Time taken for " + 3, timer);
+                 break;
+            }
+        }
+        
         PlayerPrefs.SetString("Load", "Scoreboard");
         SceneManager.LoadSceneAsync("Load");
     }

@@ -10,16 +10,58 @@ public class Scoreboard : MonoBehaviour {
 
     int changeCounter = 0;
 
+    List<KeyValuePair<string, float>> orderedList;
+
     void Start()
     {
+        float time = 0.0f;
+        string player = "";
 
+        for (int i = 1; i <= 10; i++)
+        {
+            switch(i)
+            {
+                case 1:
+                {
+                    time = PlayerPrefs.GetFloat("Time taken for " + 1);
+                    player = i.ToString();
+                    break;
+                }
+                case 2:
+                {
+                    time = PlayerPrefs.GetFloat("Time taken for " + 2);
+                    player = i.ToString();
+                    break;
+                }
+                case 3:
+                {
+                    time = PlayerPrefs.GetFloat("Time taken for " + 3);
+                    player = i.ToString();
+                    break;
+                }
+            }
+            
+            if (time > 0.0f)
+            {
+                SetScore(player, time);
+            }
+        }
+
+        if (userScores != null)
+        {
+            orderedList = userScores.ToList();
+
+            orderedList.Sort(delegate (KeyValuePair<string, float> pair1, KeyValuePair<string, float> pair2) { return pair1.Value.CompareTo(pair2.Value); });
+        }
+        
+
+        //DEBUG_INITIAL_SETUP();
     }
 
     void Init()
     {
         if (userScores != null)
         {
-            Debug.Log("Not Null");
             return;
         }
 
@@ -36,10 +78,10 @@ public class Scoreboard : MonoBehaviour {
     {
         Init();
 
-        if(userScores.ContainsKey(iD) == false)
-        {
-            return 0;
-        }
+        //if(userScores.ContainsKey(iD) == false)
+        //{
+        //    return 0;
+        //}
 
         return userScores[iD];
     }
@@ -79,5 +121,10 @@ public class Scoreboard : MonoBehaviour {
         SetScore("002", 6.25f);
         SetScore("003", 4.59f);
         SetScore("004", 2.00f);
+    }
+
+    public List<KeyValuePair<string, float>> GetOrder()
+    {
+        return orderedList;
     }
 }

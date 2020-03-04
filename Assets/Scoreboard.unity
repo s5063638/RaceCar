@@ -1121,7 +1121,7 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
+  m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
   m_ChildControlHeight: 1
 --- !u!114 &1952497487
@@ -1135,5 +1135,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3f68a6ba4a9b3a4b94146e0a20d6c2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerScoreEntryPrefab: {fileID: 1162729877547996, guid: f19ca46db80c8a64d8b2c33937d1bfca,
+  playerScoreEntryPrefab: {fileID: 1601918666129780, guid: f19ca46db80c8a64d8b2c33937d1bfca,
     type: 2}

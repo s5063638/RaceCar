@@ -11,8 +11,10 @@ public class PlayerScoreList : MonoBehaviour {
 
     int lastChangeCounter;
 
-	// Use this for initialization
-	void Start ()
+    List<KeyValuePair<string, float>> values;
+
+    // Use this for initialization
+    void Start ()
     {
         scoreboard = GameObject.FindObjectOfType<Scoreboard>();
 
@@ -22,16 +24,25 @@ public class PlayerScoreList : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
+        if(values == null)
+        {
+            if(scoreboard.GetOrder() == null)
+            {
+                return;
+            }
+            values = scoreboard.GetOrder();
+        }
 		if(scoreboard == null)
         {
             return;
         }
 
-        if(scoreboard.GetChangeCounter() == lastChangeCounter)
-        {
-            //No change
-            return;
-        }
+        //if(scoreboard.GetChangeCounter() == lastChangeCounter)
+        //{
+        //    Debug.Log("UPDATING");
+        //    //No change
+        //    return;
+        //}
 
         lastChangeCounter = scoreboard.GetChangeCounter();
 
@@ -44,12 +55,22 @@ public class PlayerScoreList : MonoBehaviour {
 
         string[] names = scoreboard.GetPlayerNames();
 
-        foreach (string name in names)
+        //Debug.Log(values[0].Value);
+
+        for(int i = 0; i < values.Count; i++)
         {
             GameObject go = (GameObject)Instantiate(playerScoreEntryPrefab);
             go.transform.SetParent(this.transform);
-            go.transform.Find("Header: PlayerID").GetComponent<Text>().text = name;
-            go.transform.Find("Header: BestTime").GetComponent<Text>().text = scoreboard.GetScore(name).ToString();
+            go.transform.Find("Header: PlayerID").GetComponent<Text>().text = values[i].Key;
+            go.transform.Find("Header: BestTime").GetComponent<Text>().text = values[i].Value.ToString();
         }
+
+        //foreach (string name in names)
+        //{
+        //    GameObject go = (GameObject)Instantiate(playerScoreEntryPrefab);
+        //    go.transform.SetParent(this.transform);
+        //    go.transform.Find("Header: PlayerID").GetComponent<Text>().text = name;
+        //    go.transform.Find("Header: BestTime").GetComponent<Text>().text = scoreboard.GetScore(name).ToString();
+        //}
     }
 }

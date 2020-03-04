@@ -31,6 +31,7 @@ public class MainMenu : MonoBehaviour {
         {
             loginCanvas.SetActive(false);
             mainMenuCanvas.SetActive(true);
+            playerID = PlayerPrefs.GetInt("Player ID");
             //Debug.Log(PlayerPrefs.GetInt("Player ID"));
         }
         else
@@ -42,10 +43,18 @@ public class MainMenu : MonoBehaviour {
 
     public void Play()
     {
+        Debug.Log(playerID);
+
+        int timesPressed = PlayerPrefs.GetInt("TimesPlayed");
+
         AnalyticsEvent.Custom("game_play", new Dictionary<string, object>
         {
-            { "PlayerID", playerID}
+            { "PlayerID: " + playerID.ToString(), timesPressed}
         });
+
+        timesPressed++;
+        PlayerPrefs.SetInt("TimesPlayed", timesPressed);
+
         PlayerPrefs.SetString("Load", "Lake Race");
         SceneManager.LoadSceneAsync("Load");
     }
@@ -75,6 +84,13 @@ public class MainMenu : MonoBehaviour {
         {
             { "PlayerID", playerID}
         });
+
+        PlayerPrefs.DeleteKey("Logged In");
+
+        PlayerPrefs.SetString("MustangOwned", "YES");
+        PlayerPrefs.SetString("CarChosen", "Mustang");
+        PlayerPrefs.SetInt("Money", 40000);
+
         AnalyticsEvent.GameOver();
         Application.Quit();
     }
