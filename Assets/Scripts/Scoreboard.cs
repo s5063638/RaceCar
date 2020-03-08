@@ -39,6 +39,48 @@ public class Scoreboard : MonoBehaviour {
                     player = i.ToString();
                     break;
                 }
+                case 4:
+                {
+                    time = PlayerPrefs.GetFloat("Time taken for " + 4);
+                    player = i.ToString();
+                    break;
+                }
+                case 5:
+                {
+                    time = PlayerPrefs.GetFloat("Time taken for " + 5);
+                    player = i.ToString();
+                    break;
+                }
+                case 6:
+                {
+                    time = PlayerPrefs.GetFloat("Time taken for " + 6);
+                    player = i.ToString();
+                    break;
+                }
+                case 7:
+                {
+                    time = PlayerPrefs.GetFloat("Time taken for " + 7);
+                    player = i.ToString();
+                    break;
+                }
+                case 8:
+                {
+                    time = PlayerPrefs.GetFloat("Time taken for " + 8);
+                    player = i.ToString();
+                    break;
+                }
+                case 9:
+                {
+                    time = PlayerPrefs.GetFloat("Time taken for " + 9);
+                    player = i.ToString();
+                    break;
+                }
+                case 10:
+                {
+                    time = PlayerPrefs.GetFloat("Time taken for " + 10);
+                    player = i.ToString();
+                    break;
+                }
             }
             
             if (time > 0.0f)

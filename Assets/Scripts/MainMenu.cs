@@ -39,6 +39,8 @@ public class MainMenu : MonoBehaviour {
             mainMenuCanvas.SetActive(false);
             loginCanvas.SetActive(true);
         }
+
+        Debug.Log(PlayerPrefs.GetInt("Money"));
     }
 
     public void Play()
@@ -49,7 +51,7 @@ public class MainMenu : MonoBehaviour {
 
         AnalyticsEvent.Custom("game_play", new Dictionary<string, object>
         {
-            { "PlayerID: " + playerID.ToString(), timesPressed}
+            { "PlayerID ", playerID }
         });
 
         timesPressed++;

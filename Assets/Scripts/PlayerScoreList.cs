@@ -57,12 +57,20 @@ public class PlayerScoreList : MonoBehaviour {
 
         //Debug.Log(values[0].Value);
 
+        string mins = "";
+        string secs = "";
+        string fullTime = "";
+
         for(int i = 0; i < values.Count; i++)
         {
+            mins = Mathf.Floor(values[i].Value / 60).ToString("00");
+            secs = Mathf.Floor(values[i].Value % 60).ToString("00");
+            fullTime = mins + ":" + secs;
+
             GameObject go = (GameObject)Instantiate(playerScoreEntryPrefab);
             go.transform.SetParent(this.transform);
             go.transform.Find("Header: PlayerID").GetComponent<Text>().text = values[i].Key;
-            go.transform.Find("Header: BestTime").GetComponent<Text>().text = values[i].Value.ToString();
+            go.transform.Find("Header: BestTime").GetComponent<Text>().text = fullTime;
         }
 
         //foreach (string name in names)

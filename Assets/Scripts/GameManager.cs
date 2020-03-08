@@ -138,6 +138,41 @@ public class GameManager : MonoBehaviour {
                  PlayerPrefs.SetFloat("Time taken for " + 3, timer);
                  break;
             }
+            case 4:
+            {
+                PlayerPrefs.SetFloat("Time taken for " + 4, timer);
+                break;
+            }
+            case 5:
+            {
+                PlayerPrefs.SetFloat("Time taken for " + 5, timer);
+                break;
+            }
+            case 6:
+            {
+                PlayerPrefs.SetFloat("Time taken for " + 6, timer);
+                break;
+            }
+            case 7:
+            {
+                PlayerPrefs.SetFloat("Time taken for " + 7, timer);
+                break;
+            }
+            case 8:
+            {
+                PlayerPrefs.SetFloat("Time taken for " + 8, timer);
+                break;
+            }
+            case 9:
+            {
+                PlayerPrefs.SetFloat("Time taken for " + 9, timer);
+                break;
+            }
+            case 10:
+            {
+                PlayerPrefs.SetFloat("Time taken for " + 10, timer);
+                break;
+            }
         }
         
         PlayerPrefs.SetString("Load", "Scoreboard");
