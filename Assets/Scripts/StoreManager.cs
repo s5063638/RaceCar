@@ -18,6 +18,7 @@ public class StoreManager : MonoBehaviour {
     public GameObject details;
     public GameObject myMoney;
     public GameObject upgradeMenu;
+    public GameObject cantUpgrade;
 
     private StoreCarDetails carDetails;
     private UpgradeDetails upgradeDets;
@@ -41,6 +42,7 @@ public class StoreManager : MonoBehaviour {
         details = GameObject.Find("CarDetails + Upgrades");
         myMoney = GameObject.FindWithTag("Money");
         upgradeMenu = GameObject.Find("UpgradesCanvas");
+        cantUpgrade = GameObject.Find("CantUpgrade");
 
         carDetails = details.GetComponent<StoreCarDetails>();
         upgradeDets = upgradeMenu.GetComponent<UpgradeDetails>();
@@ -51,6 +53,7 @@ public class StoreManager : MonoBehaviour {
         audoCar.SetActive(false);
         hotrodCar.SetActive(false);
 
+        cantUpgrade.SetActive(false);
         details.SetActive(false);
         upgradeMenu.SetActive(false);
 
@@ -205,6 +208,7 @@ public class StoreManager : MonoBehaviour {
         audoCar.SetActive(false);
         hotrodCar.SetActive(false);
 
+        cantUpgrade.SetActive(false);
         details.SetActive(false);
         general.SetActive(true);
         carOptions.SetActive(true);
@@ -320,6 +324,7 @@ public class StoreManager : MonoBehaviour {
         if (GameObject.Find("Cost").GetComponent<TextMeshProUGUI>().text == "Already Owned")
         {
             upgradeMenu.SetActive(true);
+            cantUpgrade.SetActive(false);
             details.SetActive(false);
             general.SetActive(false);
             carOptions.SetActive(false);
@@ -437,7 +442,10 @@ public class StoreManager : MonoBehaviour {
                     }
             }
         }
-        
+        else
+        {
+            StartCoroutine(CantUpgradeYet());
+        }
     }
 
     public void UpgradeBuy()
@@ -678,5 +686,12 @@ public class StoreManager : MonoBehaviour {
         carOptions.SetActive(false);
 
         myMoney.GetComponent<TextMeshProUGUI>().text = "My Money: $" + PlayerPrefs.GetInt("Money").ToString();
+    }
+
+    IEnumerator CantUpgradeYet()
+    {
+        cantUpgrade.SetActive(true);
+        yield return new WaitForSeconds(1.5f);
+        cantUpgrade.SetActive(false);
     }
 }

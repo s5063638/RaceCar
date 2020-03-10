@@ -14,11 +14,31 @@ public class CarScript : MonoBehaviour {
     public float reverseLimit;
     public bool canMove;
 
+    public AudioSource carEngine;
+
     // Use this for initialization
     void Start ()
     {
         carRigidbody = this.GetComponent<Rigidbody>();
         canMove = false;
+
+        carEngine = this.gameObject.GetComponent<AudioSource>();
+
+        string currentCar = PlayerPrefs.GetString("CarChosen");
+
+        if(PlayerPrefs.GetString(currentCar + "U1") == "YES")
+        {
+            speed = speed + (speed * 0.05f);
+            accelerateLimit += 5;
+        }
+        if(PlayerPrefs.GetString(currentCar + "U2") == "YES")
+        {
+            accelerateLimit += 63;
+        }
+        if(PlayerPrefs.GetString(currentCar + "U3") == "YES")
+        {
+            turnSpeed += 0.1f;
+        }
     }
 
     public void OnTriggerEnter(Collider collider)
@@ -99,6 +119,22 @@ public class CarScript : MonoBehaviour {
             //    }
             //}
         }
+    }
+
+    void Update()
+    {
+        float min = 1.0f;
+        float max = 2.0f;
+
+        float mod = max - min;
+
+        float calc = min + (carRigidbody.velocity.magnitude / accelerateLimit) * mod;
+
+        if(calc > max)
+        {
+            calc = max;
+        }
+        carEngine.pitch = calc;
     }
 
     public void Accelerate()

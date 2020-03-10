@@ -14,6 +14,7 @@ public class MainMenu : MonoBehaviour {
 
     private int playerID;
 
+    private AudioSource music;
     void Awake()
     {
         //AnalyticsResult result = Analytics.CustomEvent("Test");
@@ -26,6 +27,7 @@ public class MainMenu : MonoBehaviour {
         mainMenuCanvas = GameObject.Find("MainMenuCanvas");
         loginCanvas = GameObject.Find("LoginCanvas");
         inputField = GameObject.FindGameObjectWithTag("Input");
+        music = GameObject.Find("Music").GetComponent<AudioSource>();
 
         if(PlayerPrefs.GetString("Logged In") == "Yes")
         {
@@ -67,6 +69,8 @@ public class MainMenu : MonoBehaviour {
         {
             { "PlayerID", playerID}
         });
+
+        //DontDestroyOnLoad(music);
 
         PlayerPrefs.SetString("Load", "Store");
         SceneManager.LoadSceneAsync("Load");
